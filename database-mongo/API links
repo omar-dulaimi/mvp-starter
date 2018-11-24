@@ -1,0 +1,7 @@
+API links:
+
+1) Categories:
+http://quotes.rest/qod/categories.json
+
+2) Quote based on category:
+http://quotes.rest/qod.json?category=management 

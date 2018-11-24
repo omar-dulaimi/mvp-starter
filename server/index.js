@@ -1,29 +1,63 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+
+var db = require('../database-mongo');
+var api = require('../helpers/theysaidsoAPI');
 
 var app = express();
+app.use(bodyParser.json())
 
-// UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../react-client/dist'));
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
+
 
 app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
+  db.selectAll(function (err, data) {
+    if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data);
+      console.log('-------------From DB: ', data);
+      console.log('----------data.length=', data.length)
+      if(data.length === 0){
+        console.log('------------data is empty!')
+        api.getQuoteCategories(function(err, data){
+          console.log(data)
+        });
+      }
+      res.send(data);
     }
   });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.post('/items', function (req, res) {
+  console.log('----------- item = ', req.body.item);
+  console.log('----------- item = ', req.body.qty);
+  let item = req.body.item;
+  let qty = req.body.qty;
+
+  db.isQuoteExist(item, function (err, result) {
+    if (err) {
+      console.log('---------------- error checking for quote!');
+    } else {
+      if (!result) {
+        db.insertQuote(item, qty, function (err, result) {
+          if (err) {
+            console.log('------------error in inserting quote!');
+          } else {
+            res.send(result);
+            // console.log('--------Saved on DB!()');
+          }
+        });
+      } else {
+        res.send('Quote already exist!');
+        console.log('-------------Quote already exist!');
+      }
+
+    }
+  });
+});
+
+app.listen(5500, function () {
+  console.log('listening on port 5500!');
 });
 
