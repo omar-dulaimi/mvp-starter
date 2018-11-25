@@ -29,16 +29,16 @@ Once the project moves into development, the press release can be used as a touc
   > Reading quotes online and not saving the quotes a user likes
 
 ## Solution ##
-  > Using this app will enable the users to save the quotes they want to go back to later so that they don't lose it
+  > Using this app will enable the users to save the quotes they want to go back to later
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > It was easy to get working on this project, I applied everything taht we have learned this far about full stack
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > 
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Try this app now and don't ever lose a favorite quote again!
