@@ -69,11 +69,7 @@ class App extends React.Component {
 
   //Retrieve a list of favorite quotes
   retrieveFavorites() {
-    let that = this;
-    if (that.state.showImage) {
-      that.setState({ showImage: false });
-    }
-    that.setState({ showFavs: !that.state.showFavs });
+
 
     $.ajax({
       url: '/favquotes',
@@ -86,6 +82,11 @@ class App extends React.Component {
         } else {
           console.log('Info: you already have the updated list of quotes!');
         }
+        let that = this;
+        if (that.state.showImage) {
+          that.setState({ showImage: false });
+        }
+        that.setState({ showFavs: !that.state.showFavs });
       },
       error: (err) => {
         console.log('err', err);
@@ -93,9 +94,6 @@ class App extends React.Component {
     });
   }
 
-  onClickFavs() {
-    this.retrieveFavorites();
-  }
 
   render() {
     return (
