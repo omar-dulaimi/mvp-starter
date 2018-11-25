@@ -12,10 +12,12 @@ class App extends React.Component {
     }
   }
 
+  //Get quotes once mounted
   componentDidMount() {
     this.generateQuote();
   }
 
+  //generate quotes from the API through the server
   generateQuote() {
     $.ajax({
       url: '/items',
@@ -32,6 +34,7 @@ class App extends React.Component {
     });
   }
 
+  //Add a quote to favorites
   addToFavoriteQuotes() {
     var that = this;
     $.ajax({
@@ -52,6 +55,7 @@ class App extends React.Component {
     });
   }
 
+  //Retrieve a list of favorite quotes
   retrieveFavorites() {
     $.ajax({
       url: '/favquotes',
