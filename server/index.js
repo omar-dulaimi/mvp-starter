@@ -8,7 +8,7 @@ var app = express();
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 
 //Get a quote from API and send it back to the client
 app.get('/items', function (req, res) {
@@ -95,6 +95,6 @@ app.get('/favquotes', function (req, res) {
   });
 });
 
-app.listen(8080, function () {
-  console.log('listening on port 8080!');
+app.listen(5000, function () {
+  console.log('listening on port 5000!');
 });
