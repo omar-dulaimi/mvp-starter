@@ -12,8 +12,8 @@ db.once('open', function () {
 });
 
 var itemSchema = mongoose.Schema({
-  item: String,
-  qty: Number
+  quote: String,
+  author: String,
 });
 
 var Item = mongoose.model('Item', itemSchema);
@@ -23,15 +23,19 @@ var selectAll = function (callback) {
     if (err) {
       callback(err, null);
     } else {
-      console.log('------------DB is empty!')
-      console.log('-------------items = ', items);
-      callback(null, items);
+      if (items.length === 0) {
+        console.log('------------DB is empty!')
+        callback(null, 0);
+      } else {
+        console.log('-------------items = ' +  items);
+        callback(null, items);
+      }
     }
   });
 };
 
-var insertQuote = function (item, qty, callback) {
-  Item.collection.insert({ item: item, qty: qty }, function (err, result) {
+var insertQuote = function (quote, author, callback) {
+  Item.collection.insert({ quote: quote, author: author }, function (err, result) {
     if (err) {
       callback(err, null);
     } else {
@@ -41,8 +45,8 @@ var insertQuote = function (item, qty, callback) {
   });
 }
 
-var isQuoteExist = function (item, callback) {
-  Item.collection.findOne({ item: item }, function (err, result) {
+var isQuoteExist = function (quote, callback) {
+  Item.collection.findOne({ quote: quote }, function (err, result) {
     if (err) {
       callback(err, null);
     } else {

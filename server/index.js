@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var db = require('../database-mongo');
-var api = require('../helpers/theysaidsoAPI');
+var api = require('../helpers/faveQsAPI');
 
 var app = express();
 app.use(bodyParser.json())
@@ -16,33 +16,53 @@ app.get('/items', function (req, res) {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log('-------------From DB: ', data);
-      console.log('----------data.length=', data.length)
-      if(data.length === 0){
-        console.log('------------data is empty!')
-        api.getQuoteCategories(function(err, data){
-          console.log(data)
+      api.getQuote(function (err, data) {
+        let quote = data.quote.body;
+        let author = data.quote.author;
+        console.log('-------------quote = ', quote)
+        console.log('-------------author = ', author)
+        db.isQuoteExist(quote, function (err, result) {
+          if (err) {
+            console.log('^---Error in checking for quote:get');
+          } else {
+            // if (!result) {
+            //   db.insertQuote(quote, author, function (err, result) {
+            //     if (err) {
+            //       console.log('^---error in inserting quote!');
+            //     } else {
+            //       res.send({quote: result.ops[0].quote, author: result.ops[0],author});
+            //     }
+            //   });
+            // } else {
+            //   res.send('Quote already exist!');
+            //   console.log('-------------Quote already exist!');
+            // }
+            res.send({ quote: quote, author: author });
+            // res.sendStatus(200);
+          }
         });
-      }
-      res.send(data);
+        // console.log(`Quote: ${data.quote.body}
+        // Author: ${data.quote.author}`);
+      });
+      // res.send(data);
     }
   });
 });
 
 app.post('/items', function (req, res) {
-  console.log('----------- item = ', req.body.item);
-  console.log('----------- item = ', req.body.qty);
-  let item = req.body.item;
-  let qty = req.body.qty;
+  console.log('----------- quote = ', req.body.quote);
+  console.log('----------- author = ', req.body.author);
+  let quote = req.body.quote;
+  let author = req.body.author;
 
-  db.isQuoteExist(item, function (err, result) {
+  db.isQuoteExist(quote, function (err, result) {
     if (err) {
-      console.log('---------------- error checking for quote!');
+      console.log('^---error:POST checking for quote!');
     } else {
       if (!result) {
-        db.insertQuote(item, qty, function (err, result) {
+        db.insertQuote(quote, author, function (err, result) {
           if (err) {
-            console.log('------------error in inserting quote!');
+            console.log('^---error:POST:Insert in inserting quote!');
           } else {
             res.send(result);
             // console.log('--------Saved on DB!()');
@@ -50,14 +70,60 @@ app.post('/items', function (req, res) {
         });
       } else {
         res.send('Quote already exist!');
-        console.log('-------------Quote already exist!');
+        console.log('<---Quote already exist!--->');
       }
 
     }
   });
 });
 
-app.listen(5500, function () {
-  console.log('listening on port 5500!');
+app.post('/favquotes', function (req, res) {
+  console.log('----------- quote = ', req.body.quote);
+  console.log('----------- author = ', req.body.author);
+  let quote = req.body.quote;
+  let author = req.body.author;
+
+
+  db.isQuoteExist(quote, function (err, result) {
+    if (err) {
+      console.log('^---error:POST checking for quote!');
+    } else {
+      if (!result) {
+        db.insertQuote(quote, author, function (err, result) {
+          if (err) {
+            console.log('^---error:POST:Insert in inserting quote!');
+          } else {
+            res.send('<---Quote Saved on DB!--->');
+            // res.send(result);
+          }
+        });
+      } else {
+        res.send('^---Quote already exist!---^');
+        console.log('^---Quote already exist!---^');
+      }
+    }
+  });
+
 });
 
+
+app.get('/favquotes', function (req, res) {
+  db.selectAll(function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      db.selectAll(function(err, data){
+        if(err){
+          console.log('^---error:GET:selectAll:favquotes!')
+        } else {
+          console.log('<---Sending favquotes from DB to Client--->');
+          res.send(data);
+        }
+      });
+    }
+  });
+});
+
+app.listen(5000, function () {
+  console.log('listening on port 5000!');
+});
