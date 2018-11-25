@@ -13,7 +13,7 @@ class App extends React.Component {
       quote: [],
       favquotes: [],
       showFavs: false,
-      showImage: true
+      showImage: false
     }
   }
 
