@@ -110,7 +110,7 @@ class App extends React.Component {
           <div className="col-md-8 text-center">
             <button type="button" className="btn btn-success" onClick={this.generateQuote.bind(this)}>Generate</button>
             <button type="button" className="btn btn-primary" onClick={this.addToFavoriteQuotes.bind(this)}>Like</button>
-            <button type="button" className="btn btn-info" onClick={this.onClickFavs.bind(this)}>Favorites</button>
+            <button type="button" className="btn btn-info" onClick={this.retrieveFavorites.bind(this)}>Favorites</button>
           </div>
         </div>
         <div className="row h-80 justify-content-center align-items-center contentainerfavs">
