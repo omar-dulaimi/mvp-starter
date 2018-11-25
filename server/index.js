@@ -95,6 +95,6 @@ app.get('/favquotes', function (req, res) {
   });
 });
 
-app.listen(5000, function () {
+app.listen(port, function () {
   console.log('listening on port 5000!');
 });
