@@ -15,46 +15,19 @@ app.get('/items', function (req, res) {
   api.getQuote(function (err, data) {
     let quote = data.quote.body;
     let author = data.quote.author;
-    // if (!result) {
-    //   db.insertQuote(quote, author, function (err, result) {
-    //     if (err) {
-    //       console.log('^---error in inserting quote!');
-    //     } else {
-    //       res.send({quote: result.ops[0].quote, author: result.ops[0],author});
-    //     }
-    //   });
-    // } else {
-    //   res.send('Quote already exist!');
-    //   console.log('-------------Quote already exist!');
-    // }
-    res.send({ quote: quote, author: author });
+    api.getPicture(author, function (err, result) {
+      let obj = result.query.pages;
+      let imageUrl;
+      for (let key in obj) {
+        if (obj[key].hasOwnProperty('original') && obj[key].original.hasOwnProperty('source')) {
+          imageUrl = obj[key].original.source;
+          console.log('--------imgurl = ', imageUrl)
+        }
+      }
+      imageUrl ? res.send({ quote: quote, author: author, imageUrl: imageUrl }) : res.send({ quote: quote, author: author });
+    })
   });
 });
-
-
-// app.post('/items', function (req, res) {
-//   let quote = req.body.quote;
-//   let author = req.body.author;
-
-//   db.isQuoteExist(quote, function (err, result) {
-//     if (err) {
-//       console.log('^---error:POST checking for quote!');
-//     } else {
-//       if (!result) {
-//         db.insertQuote(quote, author, function (err, result) {
-//           if (err) {
-//             console.log('^---error:POST:Insert in inserting quote!');
-//           } else {
-//             res.send(result);
-//           }
-//         });
-//       } else {
-//         res.send('Quote already exist!');
-//         console.log('<---Quote already exist!--->');
-//       }
-//     }
-//   });
-// });
 
 //Save a quote sent from the client on the DB
 app.post('/favquotes', function (req, res) {
@@ -98,3 +71,45 @@ app.get('/favquotes', function (req, res) {
 app.listen(port, function () {
   console.log('listening on port 5000!');
 });
+
+
+// app.post('/items', function (req, res) {
+//   let quote = req.body.quote;
+//   let author = req.body.author;
+
+//   db.isQuoteExist(quote, function (err, result) {
+//     if (err) {
+//       console.log('^---error:POST checking for quote!');
+//     } else {
+//       if (!result) {
+//         db.insertQuote(quote, author, function (err, result) {
+//           if (err) {
+//             console.log('^---error:POST:Insert in inserting quote!');
+//           } else {
+//             res.send(result);
+//           }
+//         });
+//       } else {
+//         res.send('Quote already exist!');
+//         console.log('<---Quote already exist!--->');
+//       }
+//     }
+//   });
+// });
+
+// mongoose.connect('mongodb://omar:omar123@ds115874.mlab.com:15874/testing-heroku');
+
+
+
+// if (!result) {
+    //   db.insertQuote(quote, author, function (err, result) {
+    //     if (err) {
+    //       console.log('^---error in inserting quote!');
+    //     } else {
+    //       res.send({quote: result.ops[0].quote, author: result.ops[0],author});
+    //     }
+    //   });
+    // } else {
+    //   res.send('Quote already exist!');
+    //   console.log('-------------Quote already exist!');
+    // }
