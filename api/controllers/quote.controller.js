@@ -25,7 +25,7 @@ function getAuthorImage(wikiObj) {
 exports.generateQuote = async (req, res) => {
     try {
         const {
-            quote: { body, author },
+            quote: { body, author, id: favqsId },
         } = await axios.get('https://favqs.com/api/qotd');
 
         const wikiObj = await axios.get(
@@ -36,7 +36,7 @@ exports.generateQuote = async (req, res) => {
 
         const [authorImage] = getAuthorImage(wikiObj);
 
-        res.status(200).json({ quote: body, authorImage });
+        res.status(200).json({ quote: body, authorImage, favqsId });
     } catch (e) {
         res.status(500).json({
             message: 'Could not generate quote!',
@@ -45,4 +45,26 @@ exports.generateQuote = async (req, res) => {
     }
 };
 
-exports.addQuoteToFavs = async (req, res) => {};
+exports.addQuoteToFavs = async (req, res) => {
+    try {
+        const { favqsId } = req.body;
+        const foundQuote = await Quote.findOne({ favqsId });
+
+        if (!foundQuote) {
+            const quote = new Quote(body);
+            await quote.save();
+            res.status(200).json({
+                message: 'Quote added to favorites successfully!',
+            });
+        } else {
+            res.status(500).json({
+                message: 'Quote already in favorites!',
+            });
+        }
+    } catch (e) {
+        res.status(500).json({
+            message: 'Could not add quote to favorites!',
+            error: e,
+        });
+    }
+};
