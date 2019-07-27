@@ -3,6 +3,11 @@ const Schema = require('../config').Schema;
 
 const QuoteSchema = new Schema(
     {
+        favqsId: {
+            type: String,
+            required: true,
+            unique: true,
+        },
         quote: {
             type: String,
             required: true,
