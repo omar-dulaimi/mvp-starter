@@ -38,7 +38,7 @@ exports.generateQuote = async (req, res) => {
 
         const [authorImage] = getAuthorImage(wikiObj.data);
 
-        res.status(200).json({ quote: body, authorImage, favqsId });
+        res.status(200).json({ quote: body, authorImage, favqsId, author });
     } catch (e) {
         res.status(500).json({
             message: 'Could not generate quote!',
@@ -53,7 +53,7 @@ exports.addQuoteToFavs = async (req, res) => {
         const foundQuote = await Quote.findOne({ favqsId });
 
         if (!foundQuote) {
-            const quote = new Quote(body);
+            const quote = new Quote(req.body);
             await quote.save();
             res.status(200).json({
                 message: 'Quote added to favorites successfully!',
