@@ -1,6 +1,6 @@
 {
-    "name": "github-fetcher-fullstack-v2",
-    "version": "1.0.0",
+    "name": "quotes-machine",
+    "version": "2.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -9,7 +9,7 @@
         "react-dev": "webpack -d --watch",
         "server-dev": "nodemon app.js"
     },
-    "author": "Beth Johnson",
+    "author": "Omar Dulaimi",
     "license": "ISC",
     "devDependencies": {
         "babel-core": "^6.23.1",
