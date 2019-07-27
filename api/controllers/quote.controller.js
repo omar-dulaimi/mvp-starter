@@ -68,3 +68,15 @@ exports.addQuoteToFavs = async (req, res) => {
         });
     }
 };
+
+exports.getFavorites = async (req, res) => {
+    try {
+        const favoriteQuotes = await Quote.find({ isDeleted: { $ne: true } });
+        res.status(200).json(favoriteQuotes);
+    } catch (e) {
+        res.status(500).json({
+            message: 'Could not get favorites!',
+            error: e,
+        });
+    }
+};
