@@ -4,7 +4,9 @@ const QuoteController = require('../../controllers/quote.controller');
 
 router
     .route('/')
-    .get(QuoteController.generateQuote)
+    .get(QuoteController.getFavorites)
     .post(QuoteController.addQuoteToFavs);
+
+route('/generate').get(QuoteController.generateQuote);
 
 module.exports = router;
