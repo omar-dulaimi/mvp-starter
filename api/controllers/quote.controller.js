@@ -25,7 +25,9 @@ function getAuthorImage(wikiObj) {
 exports.generateQuote = async (req, res) => {
     try {
         const {
-            quote: { body, author, id: favqsId },
+            data: {
+                quote: { body, author, id: favqsId },
+            },
         } = await axios.get('https://favqs.com/api/qotd');
 
         const wikiObj = await axios.get(
@@ -34,7 +36,7 @@ exports.generateQuote = async (req, res) => {
             )}`,
         );
 
-        const [authorImage] = getAuthorImage(wikiObj);
+        const [authorImage] = getAuthorImage(wikiObj.data);
 
         res.status(200).json({ quote: body, authorImage, favqsId });
     } catch (e) {
