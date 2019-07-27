@@ -4,7 +4,7 @@ const Schema = require('../config').Schema;
 const QuoteSchema = new Schema(
     {
         favqsId: {
-            type: String,
+            type: Number,
             required: true,
             unique: true,
         },
@@ -15,6 +15,9 @@ const QuoteSchema = new Schema(
         author: {
             type: String,
             required: true,
+        },
+        authorImage: {
+            type: String,
         },
         isDeleted: {
             type: Boolean,
