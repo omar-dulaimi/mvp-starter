@@ -27,10 +27,10 @@ class App extends React.Component {
         this.setState({ showImage: true });
 
         axios
-            .get('/items')
-            .then((quote) => {
+            .get('/api/v1/quotes/generate')
+            .then((res) => {
                 this.setState({
-                    quote: quote.data,
+                    quote: res.data,
                 });
             })
             .catch((err) => {
@@ -44,7 +44,7 @@ class App extends React.Component {
     addToFavoriteQuotes() {
         const { quote } = this.state;
         axios
-            .post('/favquotes', quote)
+            .post('/api/v1/quotes', quote)
             .then((res) => {})
             .catch((err) => {
                 console.log({
@@ -57,7 +57,7 @@ class App extends React.Component {
     retrieveFavorites() {
         const { showImage, showFavs } = this.state;
         axios
-            .get('/favquotes')
+            .get('/api/v1/quotes')
             .then((favquotes) => {
                 this.setState({
                     favquotes: favquotes.data,
@@ -115,7 +115,7 @@ class App extends React.Component {
                         <Favs favquotes={this.state.favquotes} />
                     ) : null}
                     {this.state.showImage ? (
-                        <QuoteImage quoteImg={this.state.quote.imageUrl} />
+                        <QuoteImage quoteImg={this.state.quote.authorImage} />
                     ) : null}
                 </div>
             </div>
