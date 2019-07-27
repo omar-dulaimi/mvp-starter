@@ -7,6 +7,6 @@ router
     .get(QuoteController.getFavorites)
     .post(QuoteController.addQuoteToFavs);
 
-route('/generate').get(QuoteController.generateQuote);
+router.route('/generate').get(QuoteController.generateQuote);
 
 module.exports = router;
