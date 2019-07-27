@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
+    useMongoClient: true,
 });
 
 const db = mongoose.connection;
