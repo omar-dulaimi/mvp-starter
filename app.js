@@ -15,7 +15,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, './react-client/dist')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 
 app.use('/api/v1', routes);
 
