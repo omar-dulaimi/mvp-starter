@@ -1,9 +1,9 @@
 import React from 'react';
-import ListItem from '../ListItem/ListItem.jsx';
+import QuoteItem from './QuoteItem/QuoteItem.jsx';
 
 const List = (props) => (
     <div>
-        <ListItem quote={props.quote} />
+        <QuoteItem quote={props.quote} />
     </div>
 );
 export default List;

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Favs from './components/Favs/Favs.jsx';
 import QuoteImage from './components/QuoteImage/QuoteImage.jsx';
-import List from './components/List/List.jsx';
+import Quotes from './components/Quotes/Quotes.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -84,7 +84,7 @@ class App extends React.Component {
                         <h1 className="title">Quotes Machine</h1>
                     </div>
                     <div className="col-md-12">
-                        <List quote={this.state.quote} />
+                        <Quotes quote={this.state.quote} />
                     </div>
                     <div className="col-md-8 text-center">
                         <button
