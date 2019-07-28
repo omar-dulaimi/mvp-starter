@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Favs from './components/Favs/Favs.jsx';
-import QuoteImage from './components/QuoteImage/QuoteImage.jsx';
+import QuoteImage from './components/Quotes/QuoteImage/QuoteImage.jsx';
 import Quotes from './components/Quotes/Quotes.jsx';
 
 class App extends React.Component {
