@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Favs from './components/Favs.jsx';
-import QuoteImage from './components/QuoteImage.jsx';
-import List from './components/List.jsx';
+import Favs from './components/Favs/Favs.jsx';
+import QuoteImage from './components/QuoteImage/QuoteImage.jsx';
+import List from './components/List/List.jsx';
 
 class App extends React.Component {
     constructor(props) {
