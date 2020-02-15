@@ -33,7 +33,7 @@ class App extends React.Component {
     this.setState({ showImage: true });
 
     axios
-      .get('/quotes/generate')
+      .get('/api/v1/quotes/generate')
       .then((res) => {
         this.setState({
           quote: res.data,
@@ -50,7 +50,7 @@ class App extends React.Component {
   addToFavoriteQuotes() {
     const { quote } = this.state;
     axios
-      .post('/quotes', quote)
+      .post('/api/v1/quotes', quote)
       .then((res) => {})
       .catch((err) => {
         console.log({
@@ -63,7 +63,7 @@ class App extends React.Component {
   retrieveFavorites() {
     const { showImage, showFavs } = this.state;
     axios
-      .get('/quotes')
+      .get('/api/v1/quotes')
       .then((favquotes) => {
         this.setState({
           favquotes: favquotes.data,
