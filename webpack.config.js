@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
-    entry: ['babel-polyfill', `${SRC_DIR}/index.jsx`],
+    entry: [`${SRC_DIR}/index.jsx`],
     output: {
         path: DIST_DIR,
         filename: 'bundle.js'
@@ -37,7 +37,8 @@ const config = {
     plugins: [
         new HtmlWebPackPlugin({
             template: "./client/src/index.html",
-            filename: "./index.html"
+            filename: "./index.html",
+            chunksSortMode: 'dependency',
         }),
         new MiniCssExtractPlugin({ // plugin for controlling how compiled css will be outputted and named
             filename: "client/dist/[name].css",

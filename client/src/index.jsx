@@ -6,12 +6,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './components/Favs/Favs.css';
 import './components/Quotes/QuoteImage/QuoteImage.css';
 import './components/Quotes/QuoteItem/QuoteItem.css';
+import './components/ProgressSpinner/ProgressSpinner.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Favs from './components/Favs/Favs.jsx';
 import QuoteImage from './components/Quotes/QuoteImage/QuoteImage.jsx';
 import Quotes from './components/Quotes/Quotes.jsx';
+import ProgressSpinner from './components/ProgressSpinner/ProgressSpinner.jsx';
 const getBaseUrl = require('../../getBaseUrl.js');
 axios.interceptors.request.use(
   async (config) => {
@@ -28,6 +30,7 @@ class App extends React.Component {
       favquotes: [],
       showFavs: false,
       showImage: false,
+      loading: false,
     };
   }
 
@@ -39,13 +42,14 @@ class App extends React.Component {
     if (this.state.showFavs) {
       this.setState({ showFavs: false });
     }
-    this.setState({ showImage: true });
+    this.setState({ showImage: true, loading: true });
 
     axios
       .get('/api/v1/quotes/generate')
       .then((res) => {
         this.setState({
           quote: res.data,
+          loading: false,
         });
       })
       .catch((err) => {
@@ -58,9 +62,12 @@ class App extends React.Component {
 
   addToFavoriteQuotes() {
     const { quote } = this.state;
+    this.setState({ loading: true });
     axios
       .post('/api/v1/quotes', quote)
-      .then((res) => {})
+      .then((res) => {
+        this.setState({ loading: false });
+      })
       .catch((err) => {
         console.log({
           msg: 'Failure: could not send quote!',
@@ -76,12 +83,13 @@ class App extends React.Component {
       .then((favquotes) => {
         this.setState({
           favquotes: favquotes.data,
+          loading: true,
         });
 
         if (showImage) {
           this.setState({ showImage: false });
         }
-        this.setState({ showFavs: !showFavs });
+        this.setState({ showFavs: !showFavs, loading: false });
       })
       .catch((err) => {
         console.log({
@@ -92,7 +100,9 @@ class App extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.loading ? (
+      <ProgressSpinner />
+    ) : (
       <div className="page">
         <div className="main">
           <div>
