@@ -2,53 +2,43 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
 body {
-    background-color: #8e98aa;
+  background-color: #8e98aa;
 }
 
 #app {
-    margin-top: 2%;
+  margin-top: 2%;
 }
 
 .contentainer {
-    padding-right: 2%;
-    padding-left: 2%;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    background-color: #6495ed;
+  padding-right: 2%;
+  padding-left: 2%;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  background-color: #6495ed;
 }
 
 .contentainerfavs {
-    margin-top: 3%;
-    padding-right: 2%;
-    padding-left: 2%;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    background-color: #6495ed;
-}
-
-.quote {
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-}
-
-.author {
-    padding-top: 2%;
-    font-family: 'Eczar', serif;
+  margin-top: 3%;
+  padding-right: 2%;
+  padding-left: 2%;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  background-color: #6495ed;
 }
 
 .title {
-    margin-left: -3%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+  margin-left: -3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .imgurl {
-    width: auto;
-    height: auto;
-    max-width: 400px;
-    max-height: 400px;
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
 }
