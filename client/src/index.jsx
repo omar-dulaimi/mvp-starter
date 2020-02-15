@@ -10,7 +10,14 @@ import axios from 'axios';
 import Favs from './components/Favs/Favs.jsx';
 import QuoteImage from './components/Quotes/QuoteImage/QuoteImage.jsx';
 import Quotes from './components/Quotes/Quotes.jsx';
-
+const getBaseUrl = require('../../getBaseUrl.js');
+axios.interceptors.request.use(
+  async (config) => {
+    config.baseURL = getBaseUrl();
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 class App extends React.Component {
   constructor(props) {
     super(props);
