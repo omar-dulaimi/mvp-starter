@@ -10,7 +10,7 @@ mongoose.connect(process.env.MONGO_URI, {
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
 
-mongoose.set('useFindAndModify', false);
+// mongoose.set('useFindAndModify', false);
 
 db.on('error', (err) => {
     console.log('Mongoose DB Connection Error:');
