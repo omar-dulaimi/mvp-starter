@@ -1,6 +1,5 @@
-.imgurl {
-  width: auto;
-  height: auto;
-  max-width: 400px;
-  max-height: 400px;
+.author-image {
+  min-width: 14rem;
+  height: 17rem;
+  margin-right: 1rem;
 }
