@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
-    entry: `${SRC_DIR}/index.jsx`,
+    entry: ['babel-polyfill', `${SRC_DIR}/index.jsx`],
     output: {
         path: DIST_DIR,
         filename: 'bundle.js'
