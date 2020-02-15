@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import './components/Favs/Favs.css';
+import './components/Quotes/QuoteImage/QuoteImage.css';
+import './components/Quotes/QuoteItem/QuoteItem.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -91,15 +93,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container h-100">
-        <div className="row h-100 justify-content-center align-items-center contentainer">
-          <div className="col-md-12">
-            <h1 className="title">Quotes Machine</h1>
+      <div className="page">
+        <div className="main">
+          <div>
+            <h1>Quotes Machine</h1>
           </div>
-          <div className="col-md-12">
+          <div>
             <Quotes quote={this.state.quote} />
           </div>
-          <div className="col-md-8 text-center">
+          <div>
             <button
               type="button"
               className="btn btn-success"
@@ -123,7 +125,7 @@ class App extends React.Component {
             </button>
           </div>
         </div>
-        <div className="row h-80 justify-content-center align-items-center favs">
+        <div className="author-image-section">
           {this.state.showFavs ? (
             <Favs favquotes={this.state.favquotes} />
           ) : null}
