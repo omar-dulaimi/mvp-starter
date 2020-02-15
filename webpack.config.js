@@ -42,8 +42,8 @@ const config = {
         new MiniCssExtractPlugin({ // plugin for controlling how compiled css will be outputted and named
             filename: "client/dist/[name].css",
             chunkFilename: "css/[id].css"
-        })
-    ]
+        }),
+    ],
 };
 
 module.exports = config;

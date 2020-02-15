@@ -7,7 +7,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
 import Favs from './components/Favs/Favs.jsx';
 import QuoteImage from './components/Quotes/QuoteImage/QuoteImage.jsx';
 import Quotes from './components/Quotes/Quotes.jsx';
@@ -34,7 +33,7 @@ class App extends React.Component {
     this.setState({ showImage: true });
 
     axios
-      .get('/api/v1/quotes/generate')
+      .get('/quotes/generate')
       .then((res) => {
         this.setState({
           quote: res.data,
@@ -51,7 +50,7 @@ class App extends React.Component {
   addToFavoriteQuotes() {
     const { quote } = this.state;
     axios
-      .post('/api/v1/quotes', quote)
+      .post('/quotes', quote)
       .then((res) => {})
       .catch((err) => {
         console.log({
@@ -64,7 +63,7 @@ class App extends React.Component {
   retrieveFavorites() {
     const { showImage, showFavs } = this.state;
     axios
-      .get('/api/v1/quotes')
+      .get('/quotes')
       .then((favquotes) => {
         this.setState({
           favquotes: favquotes.data,
